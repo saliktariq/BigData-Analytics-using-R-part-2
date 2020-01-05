@@ -1,0 +1,73 @@
+---
+title: "BSc Coursework 2"
+author: "Salik Tariq / Student ID: 12516369"
+output: pdf_document
+---
+# 1)	Bayesian Networks and Naïve Bayes Classifiers
+
+
+### (a) Given a training dataset including 30 instances and a Bayesian network indicating the relationships between 3 features (i.e. Income, Student and Credit Rate), and the class attribute (i.e. Buy Computer), please create the conditional probability tables by hand.
+
+
+
+### (b) Make predictions for 2 testing instances by using the Bayesian network classifier
+
+
+
+### (c) Based on the conditional independence assumption between features, please create the conditional probability tables by hand.
+
+
+
+### (d) Make predictions for 2 testing instances by using the naïve Bayes classifier
+
+
+
+# 2) Decision Trees and Random Forests
+## To predict room occupancy using the decision tree classification algorithm.
+
+### (a) Load the room occupancy data and train a decision tree classifier. Evaluate the predictive performance by reporting the accuracy obtained on the testing dataset.
+
+
+### (b) Output and analyse the tree learned by the decision tree algorithm, i.e. plot the tree structure and make a discussion about it.
+
+
+### (c) Train a random forests classifier, and evaluate the predictive performance by reporting the accuracy obtained on the testing dataset.
+
+
+### (d) Output and analyse the feature importance obtained by the random forests classifier.
+
+
+
+# 3) SVM
+## To predict the wine quality using the support vector machine classification algorithm.
+
+### (a) Download the wine quality data and use the training dataset to conduct the grid-search to find the optimal hyperparameters of svm by using the linear kernal.
+
+
+### (b) Train a svm classifier by using the linear kernal and the corresponding optimal hyperparameters, then make predictions on the testing dataset, report the predictive performance.
+
+
+### (c) Conduct the grid-search to find the optimal hyperparameters of svm by using the RBF kernal.
+
+
+### (d) Train a svm classifier by using the RBF kernal and the corresponding optimal hyperparameters, then make predictions on the testing dataset, report the predictive performance.
+
+
+### (e) Conduct the ROC curve analysis to compare the predictive performance of svm classifiers trained by using the linear and RBF kernels respectively.
+#### Hint: Given a pre-defined hyperparameter space - C: [0.01, 0.1, 1, 5, 10], and γ: [0.01, 0.03, 0.1, 0.5, 1].
+
+
+# 4) Hierarchical Clustering
+## Consider the USArrests data. We will now perform hierarchical clustering on the states.
+
+
+### (a) Using hierarchical clustering with complete linkage and Euclidean distance, cluster the states.
+
+
+### (b) Cut the dendrogram at a height that results in three distinct clusters. Which states belong to which clusters?
+
+
+### (c) Hierarchically cluster the states using complete linkage and Euclidean distance, after scaling the variables to have standard deviation one.
+
+### (d) What effect does scaling the variables have on the hierarchical clustering obtained? In your opinion, should the variables be scaled before the inter-observation dissimilarities are computed? Provide a justification for your answer.
+
