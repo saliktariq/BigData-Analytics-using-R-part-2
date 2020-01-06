@@ -83,8 +83,33 @@ plot(euclidean_cluster, main="hierarchical clustering with complete linkage and 
 
 ### (b) Cut the dendrogram at a height that results in three distinct clusters. Which states belong to which clusters?
 
+```{r}
+clust_avg <- hclust(data, method = 'average')
+plot(clust_avg)
+cut_avg <- cutree(clust_avg, k = 3)
+plot(clust_avg)
+rect.hclust(clust_avg , k = 3, border = 2:6)
+abline(h = 3, col = 'blue')
+```
+
 
 ### (c) Hierarchically cluster the states using complete linkage and Euclidean distance, after scaling the variables to have standard deviation one.
 
+```{r}
+data_sets <- as.data.frame(scale(data_sets))
+
+data<-dist(data_sets, method = 'euclidean')
+#hierarchical clustering
+hiera_data<-hclust(data, method="complete")
+#cluster the states
+plot(hiera_data)
+
+```
+
 ### (d) What effect does scaling the variables have on the hierarchical clustering obtained? In your opinion, should the variables be scaled before the inter-observation dissimilarities are computed? Provide a justification for your answer.
+
+In scaling we are transforming numerical values to get specific helpful properties In scaling we are changing 
+the range of data as we can see earlier the range/height  was 0-300 and after scaling it shrinks to 0-6.We should have 
+scaled the data before because whenever we have  parameters/Features that differ from each other in terms of range of values 
+then you have to normalise the data so that the difference in these range of values does not affect your outcome.
 
