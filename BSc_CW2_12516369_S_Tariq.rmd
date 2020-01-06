@@ -273,6 +273,7 @@ rf_model$importance
 
 ### (a) Download the wine quality data and use the training dataset to conduct the grid-search to find the optimal hyperparameters of svm by using the linear kernal.
 ```{r}
+
 set.seed(300)
 data_train <- read.csv(file="WineQuality_training.txt", header=TRUE, sep=",")
 data_test <- read.csv(file="WineQuality_testing.txt", header=TRUE, sep=",")
@@ -295,7 +296,7 @@ summary(h_tune)
 ```
 
 ### (b) Train a svm classifier by using the linear kernal and the corresponding optimal hyperparameters, then make predictions on the testing dataset, report the predictive performance.
-
+```{r}
 model_lin <- svm(quality ~., data = data_train,kernel = 'linear' 
              , cost =10 , gamma = 0.01 )
 
