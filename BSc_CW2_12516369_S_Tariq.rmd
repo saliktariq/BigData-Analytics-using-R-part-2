@@ -9,25 +9,25 @@ output: pdf_document
 ### (a) Given a training dataset including 30 instances and a Bayesian network indicating the relationships between 3 features (i.e. Income, Student and Credit Rate), and the class attribute (i.e. Buy Computer), please create the conditional probability tables by hand.
 
 ##                  Student
-##Buy Computer |  True      False
-##_________________________________
+## Buy Computer |  True      False
+## _________________________________
 ##    YES      |   0.5       0.5
 ##    NO       |   0.6875    0.3125
 
 ##                  Income
-##Buy Computer |  High      Low
-##_________________________________
+## Buy Computer |  High      Low
+## _________________________________
 ##    YES      |   0.357     0.643
 ##    NO       |   0.4375    0.5625
 
-##Buy Computer   
-##_________________________________
+## Buy Computer   
+## _________________________________
 ##    YES      |   0.467
 ##    NO       |   0.533
 
 ##                                        Credit Rating
-##Income  Student  Buy Computer     |   Fair      Excellent
-##__________________________________|_______________________
+## Income  Student  Buy Computer     |   Fair      Excellent
+## __________________________________|_______________________
 ##   High   True     Yes            |    0.5         0.5
 ##   Low    True     Yes            |    0.6         0.4
 ##   High   False    Yes            |    0.334       0.666
@@ -92,25 +92,25 @@ P(Buy Computer = No, Income = High, Student = False, Credit Rating = Fair)
 ### (c) Based on the conditional independence assumption between features, please create the conditional probability tables by hand.
 
 ##                  Student
-##Buy Computer |  True      False
-##_________________________________
+## Buy Computer |  True      False
+## _________________________________
 ##    YES      |   0.5       0.5
 ##    NO       |   0.6875    0.3125
 
 ##                  Income
-##Buy Computer |  High      Low
-##_________________________________
+## Buy Computer |  High      Low
+## _________________________________
 ##    YES      |   0.357     0.643
 ##    NO       |   0.4375    0.5625
 
-##Buy Computer   
-##_________________________________
+## Buy Computer   
+## _________________________________
 ##    YES      |   0.467
 ##    NO       |   0.533
 
 ##                  Credit Rating
-##Buy Computer |   Fair      Excellent
-##____________________________________
+## Buy Computer |   Fair      Excellent
+## ____________________________________
 ##    YES      |   0.5        0.5
 ##    NO       |   0.5625     0.4375
 
@@ -349,7 +349,7 @@ print(paste('Accuracy for test', accuracy_Test))
 ```
 
 ### (e) Conduct the ROC curve analysis to compare the predictive performance of svm classifiers trained by using the linear and RBF kernels respectively.
-#### Hint: Given a pre-defined hyperparameter space - C: [0.01, 0.1, 1, 5, 10], and γ: [0.01, 0.03, 0.1, 0.5, 1].
+#### Hint: Given a pre-defined hyperparameter space - C: [0.01, 0.1, 1, 5, 10], and y: [0.01, 0.03, 0.1, 0.5, 1].
 
 ```{r}
 library("ROSE")
