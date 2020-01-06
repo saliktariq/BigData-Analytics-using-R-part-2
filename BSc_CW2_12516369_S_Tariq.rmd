@@ -36,7 +36,7 @@ library("gplots")
 library("ROCR")
 library("pROC")
 
-set.seed(1315)
+set.seed(300)
 data_train <- read.csv(file="RoomOccupancy_Training.txt", header=TRUE, sep=",")
 data_test <- read.csv(file="RoomOccupancy_Testing.txt", header=TRUE, sep=",")
 #Exploring train DataSet
