@@ -26,16 +26,102 @@ output: pdf_document
 ## To predict room occupancy using the decision tree classification algorithm.
 
 ### (a) Load the room occupancy data and train a decision tree classifier. Evaluate the predictive performance by reporting the accuracy obtained on the testing dataset.
+```{r}
+#importing Libraries
 
+library("rpart")
+library("rpart.plot")
+library("randomForest")
+library("gplots")
+library("ROCR")
+library("pROC")
+
+set.seed(1315)
+data_train <- read.csv(file="RoomOccupancy_Training.txt", header=TRUE, sep=",")
+data_test <- read.csv(file="RoomOccupancy_Testing.txt", header=TRUE, sep=",")
+#Exploring train DataSet
+head(data_train)
+#printing all columns with their data type
+str(data_train)
+#Checking Null values
+any(is.na(data_train))
+
+#Training Decision Tree Model
+train_tree <-rpart(Occupancy ~.,method = "class",data = data_train)
+
+#Evaluate the predictive performance
+
+tree.preds <- predict(train_tree,data_test) 
+print(head(tree.preds))
+
+tree_pred <- as.data.frame(tree.preds)
+prob <- function(a){
+    if(a>=0.5){
+        return('Yes')
+    }else{
+        return('No')
+    }
+}
+
+tree_pred$Occupancy   <- sapply(tree_pred$Yes,prob)
+
+print(head(tree_pred))
+
+#reporting the accuracy obtained on the testing dataset
+
+#confusion matrix
+table_mat <- table(tree_pred$Occupancy,data_test$Occupancy)
+print(table_mat)
+
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+print(paste('Accuracy for test', accuracy_Test))
+
+
+
+```
 
 ### (b) Output and analyse the tree learned by the decision tree algorithm, i.e. plot the tree structure and make a discussion about it.
+```{r}
+library("rpart")
+library("rpart.plot")
+library("randomForest")
+d_tree <-rpart(Occupancy ~. , method = 'class' , data = data_train)
+#Output and analyse and plotting a tree
+rpart.plot(d_tree,uniform = T ,main = 'Occupancy Tree')
 
+#interpretation of decision tree
+rpart(formula = Occupancy ~ .,data = data_train, method = "class")
+
+```
 
 ### (c) Train a random forests classifier, and evaluate the predictive performance by reporting the accuracy obtained on the testing dataset.
+```{r}
 
+rf_model <- randomForest(Occupancy ~., data = data_train , importance = TRUE)
+print(rf_model)
+
+#evaluate the predictive performance
+#obtained on the testing dataset
+rf_pred <- predict(rf_model,data_test)
+rf_mat <- table(rf_pred,data_test$Occupancy)
+print(rf_mat)
+
+#reporting the accuracy
+accuracy_Test <- sum(diag(rf_mat)) / sum(rf_mat)
+print(paste('Accuracy for test', accuracy_Test))
+
+
+
+```
 
 ### (d) Output and analyse the feature importance obtained by the random forests classifier.
+```{r}
 
+#Feature Importance
+rf_model$importance
+
+
+```
 
 
 # 3) SVM
@@ -66,7 +152,6 @@ summary(h_tune)
 
 ### (b) Train a svm classifier by using the linear kernal and the corresponding optimal hyperparameters, then make predictions on the testing dataset, report the predictive performance.
 
-```{r}
 model_lin <- svm(quality ~., data = data_train,kernel = 'linear' 
              , cost =10 , gamma = 0.01 )
 
@@ -80,6 +165,7 @@ svm_mat <- table(model_pred,data_test$quality)
 print(svm_mat)
 accuracy_Test <- sum(diag(svm_mat)) / sum(svm_mat)
 print(paste('Accuracy for test', accuracy_Test))
+
 
 ```
 
@@ -195,3 +281,6 @@ the range of data as we can see earlier the range/height  was 0-300 and after sc
 scaled the data before because whenever we have  parameters/Features that differ from each other in terms of range of values 
 then you have to normalise the data so that the difference in these range of values does not affect your outcome.
 
+```{r}
+rm(list=ls())
+```
