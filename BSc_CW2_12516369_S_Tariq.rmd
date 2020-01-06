@@ -186,7 +186,8 @@ model_rbf <- svm(quality ~., data = data_train,kernel = 'radial'
 
 model_predrbf <- predict(model_rbf,data_test)
 
-
+print(model_predrbf)
+summary(model_predrbf)
 
 ```
 
