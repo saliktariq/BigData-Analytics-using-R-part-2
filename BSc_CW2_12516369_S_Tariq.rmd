@@ -8,11 +8,62 @@ output: pdf_document
 
 ### (a) Given a training dataset including 30 instances and a Bayesian network indicating the relationships between 3 features (i.e. Income, Student and Credit Rate), and the class attribute (i.e. Buy Computer), please create the conditional probability tables by hand.
 
+##                  Student
+##Buy Computer |  True      False
+##_________________________________
+##    YES      |   0.5       0.5
+##    NO       |   0.6875    0.3125
 
+##                  Income
+##Buy Computer |  High      Low
+##_________________________________
+##    YES      |   0.357     0.643
+##    NO       |   0.4375    0.5625
+
+##Buy Computer   
+##_________________________________
+##    YES      |   0.467
+##    NO       |   0.533
+
+##                                        Credit Rating
+##Income  Student  Buy Computer     |   Fair      Excellent
+##__________________________________|_______________________
+##   High   True     Yes            |    0.5         0.5
+##   Low    True     Yes            |    0.6         0.4
+##   High   False    Yes            |    0.334       0.666
+##   Low    False    Yes            |    0.5         0.5
+##   High   True     No             |    0.5         0.5
+##   Low    True     No             |    0.714       0.286
+##   High   False    No             |    0.334       0.666
+##   Low    False    No             |    0.5         0.5
 
 ### (b) Make predictions for 2 testing instances by using the Bayesian network classifier
 
+Prediction for Instance_31
+Income = Low
+Student = False
+Credit Rating = Excellent
 
+To predict: Buy Computer?
+
+P(Buy Computer=Yes, Income = Low, Student=False, Credit Rating = Excellent)
+=P(Income=Low | Buy Computer = Yes)
+*P(Student = False | Buy Computer = Yes)
+*P(Credit Rating = Excellent| Income = Low, Student = False, Buy Computer = Yes)
+*P(Buy Computer = Yes)
+
+= 0.643 * 0.5 * 0.5 * 0.467
+= 0.075
+
+P(Buy Computer=No, Income = Low, Student=False, Credit Rating = Excellent)
+=P(Income=Low | Buy Computer = No)
+*P(Student = False | Buy Computer = No)
+*P(Credit Rating = Excellent| Income = Low, Student = False, Buy Computer = No)
+*P(Buy Computer = No)
+
+= 0.5625 * 0.3125 * 0.5 * 0.533
+= 0.0468
+ 
 
 ### (c) Based on the conditional independence assumption between features, please create the conditional probability tables by hand.
 
