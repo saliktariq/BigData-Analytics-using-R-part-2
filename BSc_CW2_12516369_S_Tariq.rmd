@@ -379,15 +379,17 @@ abline(a=0, b=1,col = 'blue')
 
 ```{r}
 data("USArrests")
-data_sets <- USArrests 
+data_sets<-USArrests 
+head(data_sets)
+str(data_sets)
+any(is.na(data_sets))
+summary(data_sets)
 
-data_euclidean <-dist(data_sets, method = "euclidean")
-
+data<-dist(data_sets, method = 'euclidean')
 #hierarchical clustering
-euclidean_cluster <- hclust(data_euclidean, method="complete")
-
+hiera_data<-hclust(data)
 #cluster the states
-plot(euclidean_cluster, main="hierarchical clustering with complete linkage and Euclidean distance")
+plot(hiera_data)
 
 
 ```
@@ -414,7 +416,7 @@ data_sets <- as.data.frame(scale(data_sets))
 
 data<-dist(data_sets, method = 'euclidean')
 #hierarchical clustering
-hiera_data<-hclust(data, method="complete")
+hiera_data<-hclust(data)
 #cluster the states
 plot(hiera_data)
 
@@ -426,7 +428,3 @@ In scaling we are transforming numerical values to get specific helpful properti
 the range of data as we can see earlier the range/height  was 0-300 and after scaling it shrinks to 0-6.We should have 
 scaled the data before because whenever we have  parameters/Features that differ from each other in terms of range of values 
 then you have to normalise the data so that the difference in these range of values does not affect your outcome.
-
-```{r}
-rm(list=ls())
-```
