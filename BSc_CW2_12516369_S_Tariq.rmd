@@ -42,20 +42,102 @@ output: pdf_document
 ## To predict the wine quality using the support vector machine classification algorithm.
 
 ### (a) Download the wine quality data and use the training dataset to conduct the grid-search to find the optimal hyperparameters of svm by using the linear kernal.
+```{r}
+set.seed(300)
+data_train <- read.csv(file="WineQuality_training.txt", header=TRUE, sep=",")
+data_test <- read.csv(file="WineQuality_testing.txt", header=TRUE, sep=",")
+#Exploring train DataSet
+head(data_train)
+#printing all columns with their data type
+str(data_train)
+#Checking Null values
+any(is.na(data_train))
 
+library("e1071")
+model <- svm(quality ~., data = data_train,kernel = 'linear')
+summary(model)
+
+#Grid Search using Linear Kernel and finding optimal hyperparameter
+h_tune <- tune(svm,train.x = data_train[1:11] , train.y = data_train[,12] ,
+               kernel = 'linear'  ,
+               ranges = list(cost = c(0.01, 0.1, 1, 5, 10), gamma = c(0.01, 0.03, 0.1, 0.5, 1)))
+summary(h_tune)
+```
 
 ### (b) Train a svm classifier by using the linear kernal and the corresponding optimal hyperparameters, then make predictions on the testing dataset, report the predictive performance.
 
+```{r}
+model_lin <- svm(quality ~., data = data_train,kernel = 'linear' 
+             , cost =10 , gamma = 0.01 )
+
+#make predictions on the testing dataset, 
+#report the predictive performance
+
+model_pred <- predict(model,data_test)
+
+#reporting the accuracy
+svm_mat <- table(model_pred,data_test$quality)
+print(svm_mat)
+accuracy_Test <- sum(diag(svm_mat)) / sum(svm_mat)
+print(paste('Accuracy for test', accuracy_Test))
+
+```
 
 ### (c) Conduct the grid-search to find the optimal hyperparameters of svm by using the RBF kernal.
+
+```{r}
+#Training SVM using RBF
+model <- svm(quality ~., data = data_train,  kernel = 'radial')
+
+#Grid Search using RBF Kernel and finding optimal hyperparameter
+hrbf_tune <- tune(svm,train.x = data_train[1:11] , train.y = data_train[,12] ,
+               kernel = 'radial'  ,
+               ranges = list(cost = c(0.01, 0.1, 1, 5, 10), gamma = c(0.01, 0.03, 0.1, 0.5, 1)))
+summary(hrbf_tune)
+
+model_rbf <- svm(quality ~., data = data_train,kernel = 'radial' 
+             , cost =5 , gamma = 0.5 ,decision.values = TRUE,probability = TRUE)
+
+model_predrbf <- predict(model_rbf,data_test)
+
+
+
+```
 
 
 ### (d) Train a svm classifier by using the RBF kernal and the corresponding optimal hyperparameters, then make predictions on the testing dataset, report the predictive performance.
 
+```{r}
+svm.rbf_mat <- table(model_predrbf,data_test$quality)
+print(svm.rbf_mat)
+accuracy_Test <- sum(diag(svm.rbf_mat)) / sum(svm.rbf_mat)
+print(paste('Accuracy for test', accuracy_Test))
+
+
+```
 
 ### (e) Conduct the ROC curve analysis to compare the predictive performance of svm classifiers trained by using the linear and RBF kernels respectively.
 #### Hint: Given a pre-defined hyperparameter space - C: [0.01, 0.1, 1, 5, 10], and γ: [0.01, 0.03, 0.1, 0.5, 1].
 
+```{r}
+library("ROSE")
+rbf_pred <- predict(model_rbf,data_test)
+lin_pred <- predict(model_lin,data_test)
+
+rbf_pred <- prediction(as.numeric(rbf_pred) , as.numeric(data_test$quality))
+roc <- performance(rbf_pred,'tpr','fpr')
+plot(roc , main = "ROC for RBF Kernel",col = 'red')
+abline(a=0, b=1,col = 'blue')
+
+
+lin_pred <- prediction(as.numeric(lin_pred) , as.numeric(data_test$quality))
+roc <- performance(lin_pred,'tpr','fpr')
+plot(roc , main = "ROC for Linear Kernel",col = 'red')
+abline(a=0, b=1,col = 'blue')
+
+
+
+```
 
 # 4) Hierarchical Clustering
 ## Consider the USArrests data. We will now perform hierarchical clustering on the states.
