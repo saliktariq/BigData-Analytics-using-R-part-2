@@ -64,14 +64,107 @@ P(Buy Computer=No, Income = Low, Student=False, Credit Rating = Excellent)
 = 0.5625 * 0.3125 * 0.5 * 0.533
 = 0.0468
  
+Prediction for Instance_32
+Income = High
+Student = False
+Credit Rating = Fair
+
+To predict: Buy Computer?
+
+P(Buy Computer = Yes, Income = High, Student = False, Credit Rating = Fair)
+=P(Income = High | Buy Computer = Yes)
+*P(Student = False | Buy Computer = Yes)
+*P(Credit Rating = Fair | Buy Computer = Yes, Student = False, Income = High)
+*P(Buy Computer = Yes)
+
+= 0.357 * 0.5 * 0.334 * 0.467
+= 0.0278
+
+P(Buy Computer = No, Income = High, Student = False, Credit Rating = Fair)
+=P(Income = High | Buy Computer = No)
+*P(Student = False | Buy Computer = No)
+*P(Credit Rating = Fair | Buy Computer = No, Student = False, Income = High)
+*P(Buy Computer = No)
+
+= 0.4375 * 0.3125 * 0.334 * 0.533
+= 0.02434
 
 ### (c) Based on the conditional independence assumption between features, please create the conditional probability tables by hand.
 
+##                  Student
+##Buy Computer |  True      False
+##_________________________________
+##    YES      |   0.5       0.5
+##    NO       |   0.6875    0.3125
 
+##                  Income
+##Buy Computer |  High      Low
+##_________________________________
+##    YES      |   0.357     0.643
+##    NO       |   0.4375    0.5625
+
+##Buy Computer   
+##_________________________________
+##    YES      |   0.467
+##    NO       |   0.533
+
+##                  Credit Rating
+##Buy Computer |   Fair      Excellent
+##____________________________________
+##    YES      |   0.5        0.5
+##    NO       |   0.5625     0.4375
 
 ### (d) Make predictions for 2 testing instances by using the naïve Bayes classifier
 
+Prediction for Instance_31
+Income = Low
+Student = False
+Credit Rating = Excellent
 
+To predict: Buy Computer?
+
+P(Buy Computer=Yes, Income = Low, Student=False, Credit Rating = Excellent)
+=P(Income=Low | Buy Computer = Yes)
+*P(Student = False | Buy Computer = Yes)
+*P(Credit Rating = Excellent| Buy Computer = Yes)
+*P(Buy Computer = Yes)
+
+= 0.643 * 0.5 * 0.5 * 0.467
+= 0.075
+
+P(Buy Computer=No, Income = Low, Student=False, Credit Rating = Excellent)
+=P(Income=Low | Buy Computer = No)
+*P(Student = False | Buy Computer = No)
+*P(Credit Rating = Excellent| Buy Computer = No)
+*P(Buy Computer = No)
+
+= 0.5625 * 0.3125 * 0.4375 * 0.533
+= 0.041
+
+Prediction for Instance_32
+Income = High
+Student = False
+Credit Rating = Fair
+
+To predict: Buy Computer?
+
+P(Buy Computer = Yes, Income = High, Student = False, Credit Rating = Fair)
+=P(Income = High | Buy Computer = Yes)
+*P(Student = False | Buy Computer = Yes)
+*P(Credit Rating = Fair | Buy Computer = Yes)
+*P(Buy Computer = Yes)
+
+= 0.357 * 0.5 * 0.5 * 0.467
+= 0.04167
+
+P(Buy Computer = No, Income = High, Student = False, Credit Rating = Fair)
+=P(Income = High | Buy Computer = No)
+*P(Student = False | Buy Computer = No)
+*P(Credit Rating = Fair | Buy Computer = No)
+*P(Buy Computer = No)
+
+= 0.4375 * 0.3125 * 0.5625 * 0.533
+= 0.041
 
 # 2) Decision Trees and Random Forests
 ## To predict room occupancy using the decision tree classification algorithm.
