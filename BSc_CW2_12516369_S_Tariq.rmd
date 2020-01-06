@@ -63,6 +63,23 @@ output: pdf_document
 
 ### (a) Using hierarchical clustering with complete linkage and Euclidean distance, cluster the states.
 
+```{r}
+data("USArrests")
+data_sets <- USArrests 
+
+data_euclidean <-dist(data_sets, method = "euclidean")
+
+#hierarchical clustering
+euclidean_cluster <- hclust(data_euclidean, method="complete")
+
+#cluster the states
+plot(euclidean_cluster, main="hierarchical clustering with complete linkage and Euclidean distance")
+
+
+```
+
+
+
 
 ### (b) Cut the dendrogram at a height that results in three distinct clusters. Which states belong to which clusters?
 
