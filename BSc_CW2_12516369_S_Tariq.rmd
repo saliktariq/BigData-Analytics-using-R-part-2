@@ -8,34 +8,8 @@ output: pdf_document
 
 ### (a) Given a training dataset including 30 instances and a Bayesian network indicating the relationships between 3 features (i.e. Income, Student and Credit Rate), and the class attribute (i.e. Buy Computer), please create the conditional probability tables by hand.
 
-##                  Student
-##Buy Computer |  True      False
-##_________________________________
-##    YES      |   0.5       0.5
-##    NO       |   0.6875    0.3125
 
-##                  Income
-##Buy Computer |  High      Low
-##_________________________________
-##    YES      |   0.357     0.643
-##    NO       |   0.4375    0.5625
-
-##Buy Computer   
-##_________________________________
-##    YES      |   0.467
-##    NO       |   0.533
-
-##                                        Credit Rating
-##Income  Student  Buy Computer     |   Fair      Excellent
-##__________________________________|_______________________
-##   High   True     Yes            |    0.5         0.5
-##   Low    True     Yes            |    0.6         0.4
-##   High   False    Yes            |    0.334       0.666
-##   Low    False    Yes            |    0.5         0.5
-##   High   True     No             |    0.5         0.5
-##   Low    True     No             |    0.714       0.286
-##   High   False    No             |    0.334       0.666
-##   Low    False    No             |    0.5         0.5
+## Q1(a) and (c) completed by hand in a separate file CW2-R-Q1.pdf
 
 ### (b) Make predictions for 2 testing instances by using the Bayesian network classifier
 
@@ -97,28 +71,7 @@ P(Buy Computer = No, Income = High, Student = False, Credit Rating = Fair)
 
 ### (c) Based on the conditional independence assumption between features, please create the conditional probability tables by hand.
 
-##                  Student
-##Buy Computer |  True      False
-##_________________________________
-##    YES      |   0.5       0.5
-##    NO       |   0.6875    0.3125
-
-##                  Income
-##Buy Computer |  High      Low
-##_________________________________
-##    YES      |   0.357     0.643
-##    NO       |   0.4375    0.5625
-
-##Buy Computer   
-##_________________________________
-##    YES      |   0.467
-##    NO       |   0.533
-
-##                  Credit Rating
-##Buy Computer |   Fair      Excellent
-##____________________________________
-##    YES      |   0.5        0.5
-##    NO       |   0.5625     0.4375
+## Q1(a) and (c) completed by hand in a separate file CW2-R-Q1.pdf
 
 ### (d) Make predictions for 2 testing instances by using the naïve Bayes classifier
 
@@ -182,9 +135,7 @@ P(Buy Computer = No, Income = High, Student = False, Credit Rating = Fair)
 ## To predict room occupancy using the decision tree classification algorithm.
 
 ### (a) Load the room occupancy data and train a decision tree classifier. Evaluate the predictive performance by reporting the accuracy obtained on the testing dataset.
-```{r warning=false}
-#importing Libraries
-
+```{r}
 library("rpart")
 library("rpart.plot")
 library("randomForest")
@@ -290,7 +241,7 @@ rf_model$importance
 ## To predict the wine quality using the support vector machine classification algorithm.
 
 ### (a) Download the wine quality data and use the training dataset to conduct the grid-search to find the optimal hyperparameters of svm by using the linear kernal.
-```{r warning=false}
+```{r}
 
 set.seed(300)
 data_train <- read.csv(file="WineQuality_training.txt", header=TRUE, sep=",")
@@ -314,7 +265,7 @@ summary(h_tune)
 ```
 
 ### (b) Train a svm classifier by using the linear kernal and the corresponding optimal hyperparameters, then make predictions on the testing dataset, report the predictive performance.
-```{r warning=false}
+```{r}
 model_lin <- svm(quality ~., data = data_train,kernel = 'linear' 
              , cost =0.1 , gamma = 0.01 )
 
@@ -368,7 +319,7 @@ print(paste('Accuracy for test', accuracy_Test))
 ### (e) Conduct the ROC curve analysis to compare the predictive performance of svm classifiers trained by using the linear and RBF kernels respectively.
 
 
-```{r warning=false}
+```{r}
 library("ROSE")
 rbf_pred <- predict(model_rbf,data_test)
 lin_pred <- predict(model_lin,data_test)
