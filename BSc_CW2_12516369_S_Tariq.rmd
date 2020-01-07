@@ -285,7 +285,7 @@ print(paste('Accuracy for test', accuracy_Test))
 
 ### (c) Conduct the grid-search to find the optimal hyperparameters of svm by using the RBF kernal.
 
-```{r warning=false}
+```{r}
 #Training SVM using RBF
 model <- svm(quality ~., data = data_train,  kernel = 'radial')
 
