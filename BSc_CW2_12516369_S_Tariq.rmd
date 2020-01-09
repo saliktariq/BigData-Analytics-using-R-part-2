@@ -247,27 +247,28 @@ set.seed(300)
 data_train <- read.csv(file="WineQuality_training.txt", header=TRUE, sep=",")
 data_test <- read.csv(file="WineQuality_testing.txt", header=TRUE, sep=",")
 #Exploring train DataSet
-head(data_train)
+#head(data_train)
 #printing all columns with their data type
-str(data_train)
+#str(data_train)
 #Checking Null values
-any(is.na(data_train))
+#any(is.na(data_train))
 
 library("e1071")
 model <- svm(quality ~., data = data_train,kernel = 'linear')
-summary(model)
+#summary(model)
 
 #Grid Search using Linear Kernel and finding optimal hyperparameter
 h_tune <- tune(svm,train.x = data_train[1:11] , train.y = data_train[,12] ,
                kernel = 'linear'  ,
-               ranges = list(cost = c(0.01, 0.1, 1, 5, 10), gamma = c(0.01, 0.03, 0.1, 0.5, 1)))
-summary(h_tune)
+               ranges = list(cost = c(0.01, 0.1, 1, 5, 10)))
+print(paste("Optimal Cost: ",h_tune$best.parameters[1]))
+#summary(h_tune)
 ```
 
 ### (b) Train a svm classifier by using the linear kernal and the corresponding optimal hyperparameters, then make predictions on the testing dataset, report the predictive performance.
 ```{r}
 model_lin <- svm(quality ~., data = data_train,kernel = 'linear' 
-             , cost =0.1 , gamma = 0.01 )
+             , cost = 0.1)
 
 #make predictions on the testing dataset, 
 #report the predictive performance
